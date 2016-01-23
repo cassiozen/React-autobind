@@ -22,6 +22,8 @@ npm install --save react-autobind
 You will generally call autoBind from the class constructor, passing the 'this' context:
 
 ```javascript
+import autoBind from 'react-autobind';
+
 constructor() {
   super();
   autoBind(this);
@@ -33,6 +35,8 @@ Autobind is smart enough to avoid binding React related methods (such as render 
 You can also explicitly specify which methods you want to bind:
 
 ```javascript
+import autoBind from 'react-autobind';
+
 constructor() {
   super();
   autoBind(this, 'myMethod1', 'myMethod2');
@@ -44,7 +48,7 @@ constructor() {
 ```javascript
 import React from 'react';
 import {render} from 'react-dom';
-import autoBind from './autoBind';
+import autoBind from 'react-autobind';
 
 class App extends React.Component {
 
