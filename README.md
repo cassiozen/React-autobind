@@ -61,15 +61,17 @@ class App extends React.Component {
     }
     autoBind(this);
   }
-
-  componentDidMount() {
-    console.log("Component is mounted");
-  }
-
+  
   increment() {
     this.setState({
       clickCounter: this.state.clickCounter + 1
     });
+  }
+  
+  // React's render and lifecycle hooks aren't bound
+  
+  componentDidMount() {
+    console.log("Component is mounted.");
   }
 
   render(){
