@@ -1,6 +1,6 @@
 {
   "name": "react-autobind",
-  "version": "1.0.0",
+  "version": "1.0.6",
   "description": "Automatically binds methods defined within a component's Class to the current object's lexical `this` instance (similarly to the default behavior of React.createClass).",
   "main": "index.js",
   "scripts": {

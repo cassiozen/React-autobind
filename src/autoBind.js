@@ -14,7 +14,7 @@ let toBind = [];
 
 export default function autoBind (context) {
   if(context === undefined) {
-    'console' in window && console.error('Autobind error: No context provided.');
+    console.error('Autobind error: No context provided.');
     return;
   }
 
@@ -30,6 +30,11 @@ export default function autoBind (context) {
 
   toBind.forEach(function(method) {
     let descriptor = Object.getOwnPropertyDescriptor(objPrototype, method);
+
+    if(descriptor === undefined) {
+      console.warn(`Autobind: "${method}" method not found in class.`);
+      return;
+    }
 
     // Return if it's special case function or if not a function at all
     if(wontBind.indexOf(method) !== -1 || typeof descriptor.value !== 'function') {
