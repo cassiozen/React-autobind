@@ -89,6 +89,9 @@ render(<App />, document.getElementById('root'));
 ```
 
 ### Similar Projects
+
 React-autobind is similar (and forks some code from) [Autobind Decorator](https://github.com/andreypopp/autobind-decorator), with two main differences:
+
 1. React-autobind is focused on React, and avoids binding React's Component methods such as `render` and lifecycle hooks.
+
 2. React-autobind is a plain function call, while Autobind Decorator uses a more elegant but still not standardized JavaScript syntax that is subject to change in the future.
