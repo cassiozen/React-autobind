@@ -36,7 +36,7 @@ constructor(props) {
 
 Autobind is smart enough to avoid binding React related methods (such as render and lifecycle hooks).
 
-You can also explicitly exclude certain methods to exclude from binding:
+You can also explicitly specify certain methods to exclude from binding:
 
 ```javascript
 constructor(props) {
@@ -47,7 +47,7 @@ constructor(props) {
 }
 ```
 
-Or specify only certain methods you want to bind:
+Or specify the only methods that should be auto-bound:
 
 ```javascript
 constructor(props) {
