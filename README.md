@@ -28,22 +28,37 @@ import autoBind from 'react-autobind';
 You will generally call autoBind from the class constructor, passing the 'this' context:
 
 ```javascript
-constructor() {
-  super();
+constructor(props) {
+  super(props);
   autoBind(this);
 }
 ```
 
 Autobind is smart enough to avoid binding React related methods (such as render and lifecycle hooks).
 
-You can also explicitly specify which methods you want to bind:
+You can also explicitly specify certain methods to exclude from binding:
 
 ```javascript
-constructor() {
-  super();
-  autoBind(this, 'myMethod1', 'myMethod2');
+constructor(props) {
+  super(props);
+  autoBind(this, {
+    wontBind: ['leaveAlone1', 'leaveAlone2']
+  });
 }
 ```
+
+Or specify the only methods that should be auto-bound:
+
+```javascript
+constructor(props) {
+  super(props);
+  autoBind(this, {
+    bindOnly: ['myMethod1', 'myMethod2']
+  });
+}
+```
+
+Naturally, `wontBind` and `bindOnly` cannot be used together.
 
 ### Example
 
@@ -54,8 +69,8 @@ import autoBind from 'react-autobind';
 
 class App extends React.Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       clickCounter: 0
     }
