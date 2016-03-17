@@ -1,4 +1,4 @@
-const wontBind = [
+let wontBind = [
   'constructor',
   'render',
   'componentWillMount',
@@ -18,14 +18,18 @@ export default function autoBind (context) {
     return;
   }
 
+  const options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
   let objPrototype = Object.getPrototypeOf(context);
 
-  if(arguments.length > 1) {
-    // If a list of methods to bind is provided, use it.
-    toBind = Array.prototype.slice.call(arguments, 1);
+  if(options.bindOnly) {
+    // If we want to bind *only* a set list of methods, then do that (nothing else matters)
+    toBind = options.bindOnly;
   } else {
-    // If no list of methods to bind is provided, bind all available methods in class.
+    // Otherwise, bind all available methods in the class
     toBind = Object.getOwnPropertyNames(objPrototype);
+
+    // And exclude anything explicitly passed in wontBind
+    wontBind = wontBind.concat(options.wontBind || []);
   }
 
   toBind.forEach(function(method) {
