@@ -7,7 +7,8 @@ let wontBind = [
   'shouldComponentUpdate',
   'componentWillUpdate',
   'componentDidUpdate',
-  'componentWillUnmount'
+  'componentWillUnmount',
+  'componentDidCatch',
 ];
 
 let toBind = [];
