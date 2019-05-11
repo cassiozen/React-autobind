@@ -60,6 +60,33 @@ constructor(props) {
 
 Naturally, `wontBind` and `bindOnly` cannot be used together.
 
+You can even specify the methods with certain prefix to be autobound:
+
+```javascript
+constructor(props) {
+  super(props);
+  autoBind(this, {
+    bindOnlyWithPrefix: 'on'
+  });
+}
+```
+
+This is extremely useful when you follow the standard naming convention of 
+prepending `on` infront of all the UI handlers in your component.
+
+This can be easily used with `wontBind` in case, React ever releases any hook which
+might have `on` infront:
+
+```javascript
+constructor(props) {
+  super(props);
+  autoBind(this, {
+    bindOnlyWithPrefix: 'on',
+    wontBind: ['onSomeReactHook']
+  });
+}
+```
+
 ### Example
 
 ```javascript

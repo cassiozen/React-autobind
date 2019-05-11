@@ -33,6 +33,11 @@ export default function autoBind (context) {
   }
 
   toBind.forEach(function(method) {
+    // If in wontBind list, then return early. Precision wise it has the most importance.
+    if (wontBind.indexOf(method) > -1) {
+      return;
+    }
+
     let descriptor = Object.getOwnPropertyDescriptor(objPrototype, method);
 
     if(descriptor === undefined) {
@@ -40,8 +45,9 @@ export default function autoBind (context) {
       return;
     }
 
-    // Return if it's special case function or if not a function at all
-    if(wontBind.indexOf(method) !== -1 || typeof descriptor.value !== 'function') {
+    // Return if `options.bindOnlyWithPrefix` is defined and method name does not match
+    // specified prefix or if not a function at all
+    if(!method.startsWith(options.bindOnlyWithPrefix || '') || typeof descriptor.value !== 'function') {
       return;
     }
 
