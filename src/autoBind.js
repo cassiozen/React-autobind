@@ -40,8 +40,10 @@ export default function autoBind (context) {
       return;
     }
 
-    // Return if it's special case function or if not a function at all
-    if(wontBind.indexOf(method) !== -1 || typeof descriptor.value !== 'function') {
+    // Return if `options.bindOnlyWithPrefix` is defined and method name does not match
+    // specified prefix or it's special case function or if not a function at all
+    const notStartingWithPrefix = !method.startsWith(options.bindOnlyWithPrefix || '');
+    if(notStartingWithPrefix || wontBind.indexOf(method) !== -1 || typeof descriptor.value !== 'function') {
       return;
     }
 
