@@ -71,7 +71,7 @@ describe("autoBind helper function", function() {
     class A {
       constructor() {
         this.value = 42;
-        autobind(this, 'getValue');
+        autobind(this, {bindOnly: ['getValue']});
       }
 
       unbound() {
@@ -93,7 +93,7 @@ describe("autoBind helper function", function() {
     it('does not bind all methods', function() {
       let a = new A();
       let b = {};
-      b.unbound = a.unbound
+      b.unbound = a.unbound;
       assert(b.unbound() === b);
     });
   });
