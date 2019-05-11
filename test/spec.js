@@ -99,4 +99,31 @@ describe("autoBind helper function", function() {
       assert(b.bound() === 42);
     });
   });
+
+  describe("Binds methods with specific prefix", function() {
+
+    class A {
+      constructor() {
+        this.value = 42;
+        autobind(this, {bindOnlyWithPrefix: 'on'});
+      }
+
+      onUpdate(something) {
+        return this.value + something;
+      }
+
+      getValue() {
+        return this.value;
+      }
+    }
+
+    it('binds only the methods with specific prefix', function() {
+      let a = new A();
+      let b = {value: 11};
+      b.onUpdate = a.onUpdate;
+      b.getValue = a.getValue;
+      assert(b.onUpdate(10) === 52);
+      assert(b.getValue() === 11);
+    });
+  });
 });
