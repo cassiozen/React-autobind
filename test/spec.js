@@ -105,7 +105,11 @@ describe("autoBind helper function", function() {
     class A {
       constructor() {
         this.value = 42;
-        autobind(this, {bindOnlyWithPrefix: 'on'});
+        autobind(this, {bindOnlyWithPrefix: 'on', wontBind: ['onSomeReactHook']});
+      }
+
+      onSomeReactHook() {
+        return this.value + 20;
       }
 
       onUpdate(something) {
@@ -117,13 +121,22 @@ describe("autoBind helper function", function() {
       }
     }
 
-    it('binds only the methods with specific prefix', function() {
+    it('binds methods with specific prefix', function() {
       let a = new A();
       let b = {value: 11};
       b.onUpdate = a.onUpdate;
       b.getValue = a.getValue;
       assert(b.onUpdate(10) === 52);
       assert(b.getValue() === 11);
+    });
+
+    it('does not bind a method with specific prefix if its in options.wontBind', function() {
+      let a = new A();
+      let b = {value: 11};
+      b.onSomeReactHook = a.onSomeReactHook;
+      b.onUpdate = a.onUpdate;
+      assert(b.onSomeReactHook() === 31);
+      assert(b.onUpdate(10) === 52);
     });
   });
 });
