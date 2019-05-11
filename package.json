@@ -4,6 +4,7 @@
   "description": "Automatically binds methods defined within a component's Class to the current object's lexical `this` instance (similarly to the default behavior of React.createClass).",
   "main": "index.js",
   "scripts": {
+    "build": "babel src -d lib",
     "test": "mocha --require babel-core/register"
   },
   "author": "Cássio M. Antonio",
@@ -13,6 +14,7 @@
     "url": "git://github.com/cassiozen/React-autobind.git"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "~6.0.*",
     "babel-preset-es2015": "~6.0.*",
