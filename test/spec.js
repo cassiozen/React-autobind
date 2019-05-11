@@ -94,7 +94,9 @@ describe("autoBind helper function", function() {
       let a = new A();
       let b = {};
       b.unbound = a.unbound;
+      b.bound = a.getValue;
       assert(b.unbound() === b);
+      assert(b.bound() === 42);
     });
   });
 });
